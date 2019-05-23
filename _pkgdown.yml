@@ -8,9 +8,7 @@ development:
   mode: unreleased
 
 reference:
-  - title: "Hello, World!"
-    desc: >
-      Hello, World!
+  - title: "Utilities"
     contents:
-      - hello_world
+      - starts_with("%")
 
