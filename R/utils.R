@@ -16,6 +16,8 @@
 #'   + `%||%`: `NULL`
 #'   + `%{}%`: empty (`length(.lhs) == 0L`)
 #'   + `%{NA}%`: `NA`
+#'   + `%{T}%`: `TRUE`
+#'   + `%{F}%`: `FALSE`
 #' * ... returns `.rhs`.
 #'   + Returns `.lhs` otherwise.
 #' 
@@ -28,6 +30,12 @@
 #' 
 #' NA %{NA}% 1
 #' 1 %{NA}% NA
+#' 
+#' TRUE %{T}% FALSE
+#' FALSE %{T}% TRUE
+#' 
+#' TRUE %{F}% FALSE
+#' FALSE %{F}% TRUE
 
 #' @rdname defaulters
 #' 
@@ -50,10 +58,56 @@
   if (isTRUE(is.na(.lhs))) .rhs else .lhs
 }
 
+#' @rdname defaulters
+#' 
+#' @export
+`%{T}%` <- function(.lhs, .rhs) {
+  if (isTRUE(.lhs)) .rhs else .lhs
+}
 
-# `is_*()` =============================================================================
+#' @rdname defaulters
+#' 
+#' @export
+`%{F}%` <- function(.lhs, .rhs) {
+  if (.isFALSE(.lhs)) .rhs else .lhs
+}
+
+
+# `is_*()`/`all_*()` ====================================================================
+
+all_equal <- function(...) {
+  objs <- list(...)
+  stopifnot(length(objs) > 1L)
+
+  all(
+    vapply(objs[2L:length(objs)], function(x) {
+      isTRUE(all.equal(objs[[1L]], x))
+    }, logical(1L))
+  )
+}
+
+all_identical <- function(...) {
+  objs <- list(...)
+  stopifnot(length(objs) > 1L)
+  
+  all(
+    vapply(objs[2L:length(objs)], function(x) {
+      identical(objs[[1L]], x)
+    }, logical(1L))
+  )
+}
+
 
 is_empty <- function(.x) {
   length(.x) == 0L
 }
 
+is_symmetric <- function(.x) {
+  stopifnot(is.matrix(.x))
+  all(upper.tri(.x) == lower.tri(.x))
+}
+
+.isFALSE <- function(x) { 
+  # `isFALSE()` apparely didn't show up until R 3.5
+  is.logical(x) && length(x) == 1L && !is.na(x) && !x
+}
