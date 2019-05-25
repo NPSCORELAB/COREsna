@@ -1,7 +1,10 @@
 context("test-edgelists")
 
-# test_that("`fetch_edgelist()`` works", {
-#   expect_equal(
-#     
-#   )
-# })
+# .fetch_edgelist() ====================================================================
+test_that("`build_test_el()`` works", {
+  expect_true(
+    run_edgelist_tests()
+  )
+  
+  
+})

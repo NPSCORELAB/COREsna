@@ -1,4 +1,4 @@
-get_test_mat <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE,
+build_test_mat <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE,
                          .diag = FALSE, .storage = c("int", "dbl")) {
   .storage <- switch(
     match.arg(.storage, c("int", "dbl"), several.ok = FALSE),
@@ -70,14 +70,14 @@ el_from_adj_mat <- function(.adj_mat, .weighted = FALSE, ...) {
   melted[melted[, 3L] != 0, seq_len(n_cols)]
 }
 
-get_test_el <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE,
+build_test_el <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE,
                         .diag = FALSE, .storage = c("int", "dbl"), ...) {
   if (.bipartite) {
     .diag <- FALSE
     .directed <- FALSE
   }
   
-  adj_mat <- get_test_mat(.directed = .directed, .bipartite = .bipartite,
+  adj_mat <- build_test_mat(.directed = .directed, .bipartite = .bipartite,
                           .weighted = .weighted, .diag = .diag)
   out <- el_from_adj_mat(adj_mat, .weighted = .weighted, ...)
   
@@ -93,14 +93,14 @@ get_test_el <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE,
 
 
 
-get_test_ig <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE, 
+build_test_ig <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE, 
                         .diag = FALSE, ...) {
   if (.bipartite) {
     .diag <- FALSE
     .directed <- FALSE
   }
   
-  el <- get_test_el(.directed = .directed, .bipartite = .bipartite, 
+  el <- build_test_el(.directed = .directed, .bipartite = .bipartite, 
                     .weighted = .weighted, .diag = .diag)
   n_nodes <- length(unique(as.vector(el[ , 1L:2L])))
   
@@ -116,12 +116,14 @@ get_test_ig <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE,
     igraph::V(out)$type <- c(rep(TRUE, n_nodes %/% 2), rep(FALSE, n_nodes %/%  2))
   }
   
+  igraph::V(out)$node_attr <- letters[1:n_nodes]
+  
   out
 }
 
-get_test_nw <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE, 
+build_test_nw <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE, 
                         .diag = FALSE, ...) {
-  el <- get_test_el(.directed = .directed, .bipartite = .bipartite, 
+  el <- build_test_el(.directed = .directed, .bipartite = .bipartite, 
                     .weighted = .weighted, .diag = .diag)
   
   n_nodes <- length(unique(as.vector(el[ , 1L:2L])))
@@ -142,6 +144,8 @@ get_test_nw <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE,
   network::network.edgelist(
     x = el, g = out
   )
+  
+  network::set.vertex.attribute(out, attrname = "node_attr", letters[1:n_nodes])
 
   # network::add.edges.network(
   #   out, head = as.list(el[ , 1L]), tail = as.list(el[ , 2L])
@@ -157,86 +161,89 @@ get_test_nw <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE,
 
 
 
-.sort_edge_indices <- function(.x) {
-  cbind(
-    pmin(.x[, 1L], .x[, 2L]), pmax(.x[, 1L], .x[, 2L])
-  )
-}
+# .sort_edge_indices <- function(.x) {
+#   cbind(
+#     pmin(.x[, 1L], .x[, 2L]), pmax(.x[, 1L], .x[, 2L])
+#   )
+# }
 
+
+
+
+# build_test_el_ig <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE,
+#                            .diag = FALSE, .storage = c("int", "dbl")) {
+#   .fetch_edgelist(build_test_ig(.directed = .directed, .bipartite = .bipartite,
+#                               .weighted = .weighted, .diag = .diag))
+# }
+# 
+# build_test_el_nw <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE,
+#                            .diag = FALSE, .storage = c("int", "dbl")) {
+#   g <- build_test_nw(.directed = .directed, .bipartite = .bipartite,
+#                    .weighted = .weighted, .diag = .diag)
+#   out <- network::as.matrix.network.edgelist(g)
+#   
+#   attr(out, "n") <- NULL
+#   attr(out, "vnames") <- NULL
+#   
+#   out
+# }
 
 build_test_args <- function() {
   init <- list(
     list(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE, .diag = FALSE), 
     list(.directed = FALSE, .bipartite = TRUE, .weighted = TRUE, .diag = TRUE)
   )
-
+  
   out <- expand.grid(
     do.call(rbind.data.frame, init)
   )
-
+  
   apply(out, 1L, as.list)
 }
 
-get_test_el_ig <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE,
-                           .diag = FALSE, .storage = c("int", "dbl")) {
-  .fetch_edgelist(get_test_ig(.directed = .directed, .bipartite = .bipartite,
-                              .weighted = .weighted, .diag = .diag))
-}
-
-get_test_el_nw <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE,
-                           .diag = FALSE, .storage = c("int", "dbl")) {
-  g <- get_test_nw(.directed = .directed, .bipartite = .bipartite,
-                   .weighted = .weighted, .diag = .diag)
-  out <- network::as.matrix.network.edgelist(g)
-  
-  attr(out, "n") <- NULL
-  attr(out, "vnames") <- NULL
-  
-  out
-}
-
-test_edgelists <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE,
-                                .diag = FALSE, .storage = c("int", "dbl")) {
-  target_el <- get_test_el(.directed = .directed, .bipartite = .bipartite,
-                           .weighted = .weighted, .diag = .diag)
-  
-  return(target_el)
-  test_el_nw <- .fetch_edgelist(get_test_ig(.directed = .directed, .bipartite = .bipartite,
-                                              .weighted = .weighted, .diag = .diag))
-  test_el_ig <- .fetch_edgelist(get_test_nw(.directed = .directed, .bipartite = .bipartite,
-                                              .weighted = .weighted, .diag = .diag))
-  
-  res <- .all_equal(target_el, test_el_ig, test_el_nw)
-  if (res) {
-    return(res)
-  }
-  
-  if (!.all_equal(target_el, test_el_nw)) {
-    return("network failed")
-  }
-  
-  if (!.all_equal(target_el, test_el_ig)) {
-    return("igraph failed")
-  }
-}
-
-test_all <- function() {
+run_edgelist_tests <- function() {
   test_args <- build_test_args()
   
   for (i in seq_along(test_args)) {
-    target_el <- do.call(get_test_el, test_args[[i]])
-    test_ig <- .fetch_edgelist(do.call(get_test_ig, test_args[[i]]))
-    test_nw <- .fetch_edgelist(do.call(get_test_nw, test_args[[i]]))
+    target_el <- do.call(build_test_el, test_args[[i]])
+    test_ig <- .fetch_edgelist(do.call(build_test_ig, test_args[[i]]))
+    test_nw <- .fetch_edgelist(do.call(build_test_nw, test_args[[i]]))
     
     res <- .all_equal(
-      target_el, test_ig, test_nw
+      target_el[ , 1L:2L], test_ig, test_nw
     )
     
+    
     if (!res) {
-      return(test_args[[i]])
+      return(FALSE)
     }
   }
   TRUE
 }
 
+run_node_attr_tests <- function() {
+  test_args <- build_test_args()
+  
+  for (i in seq_along(test_args)) {
+    if (test_args[[i]]$.bipartite) {
+      target <- c("a", "b", "c", "d", "e", "f")
+    } else {
+      target <- c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l")
+    }
+    
+    test_ig <- node_get_attr(do.call(build_test_ig, test_args[[i]]), "node_attr")
+    test_nw <- node_get_attr(do.call(build_test_nw, test_args[[i]]), "node_attr")
+    
+    res <- .all_equal(
+      target, test_ig, test_nw
+    )
 
+    if (!res) {
+      print("test_args: "); print(test_args[[i]])
+      print("test_ig: "); print(test_ig)
+      print("test_nw: "); print(test_nw)
+      return(FALSE)
+    }
+  }
+  TRUE
+}
