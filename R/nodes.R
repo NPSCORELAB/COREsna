@@ -98,7 +98,7 @@ node_get_attr <- function(.net, .node_attr, .node_index = node_seq(.net)) {
   if (!.is_scalar_chr(.node_attr)) {
     .stop("`.node_attr` must be a scalar character.")
   }
-  if (!edge_attr_exists(.net, .node_attr)) {
+  if (!node_attr_exists(.net, .node_attr)) {
     .net <- deparse(substitute(.net))
     .stop("`{.node_attr}` is not a valid node attribute for `{.net}`.")
   }
