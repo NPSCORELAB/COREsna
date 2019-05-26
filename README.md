@@ -14,6 +14,7 @@ commit](https://img.shields.io/github/last-commit/NPSCORELAB/COREsna.svg)](https
 bytes](https://img.shields.io/github/languages/code-size/NPSCORELAB/COREsna.svg)](https://github.com/NPSCORELAB/COREsna)
 [![Travis-CI Build
 Status](https://travis-ci.org/NPSCORELAB/COREsna.svg?branch=master)](https://travis-ci.org/NPSCORELAB/COREsna)
+[![HitCount](http://hits.dwyl.io/NPSCORELAB/COREsna.svg)](http://hits.dwyl.io/NPSCORELAB/COREsna)
 
 # Overview
 
@@ -31,9 +32,6 @@ remotes::install_github("NPSCORELAB/COREsna")
 ```
 
 # Developer Notes
-
-  - [Dependency
-    Graph](https://npscorelab.github.io/docs/articles/pkgnet-report.html)
 
   - Building {`pkgdown`} Site
 
