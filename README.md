@@ -7,10 +7,6 @@
 
 <!-- badges: start -->
 
-[![HitCount](http://hits.dwyl.io/NPSCORELAB/COREsna.svg)](http://hits.dwyl.io/NPSCORELAB/COREsna)
-[![License: GPL
-v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Depends](https://img.shields.io/badge/Depends-GNU_R%3E=3.2-blue.svg)](https://www.r-project.org/)
 [![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![GitHub last
 commit](https://img.shields.io/github/last-commit/NPSCORELAB/COREsna.svg)](https://github.com/NPSCORELAB/COREsna/commits/master)
@@ -19,6 +15,11 @@ commit](https://img.shields.io/github/last-commit/NPSCORELAB/COREsna.svg)](https
 status](https://ci.appveyor.com/api/projects/status/github/NPSCORELAB/COREsna?branch=master&svg=true)](https://ci.appveyor.com/project/knapply/COREsna)
 [![Travis-CI Build
 Status](https://travis-ci.org/NPSCORELAB/COREsna.svg?branch=master)](https://travis-ci.org/NPSCORELAB/COREsna)
+
+[![License: GPL
+v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Depends](https://img.shields.io/badge/Depends-GNU_R%3E=3.2-blue.svg)](https://www.r-project.org/)
+[![HitCount](http://hits.dwyl.io/NPSCORELAB/COREsna.svg)](http://hits.dwyl.io/NPSCORELAB/COREsna)
 <!-- badges: end -->
 
 # Overview
