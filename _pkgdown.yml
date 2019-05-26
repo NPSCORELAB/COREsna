@@ -2,6 +2,7 @@ destination: docs
 
 template:
   params:
+    ganalytics: UA-140885143-1
     bootswatch: yeti
     
 development:
