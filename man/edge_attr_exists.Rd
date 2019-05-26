@@ -17,6 +17,13 @@ edge_attr_exists(.net, .edge_attr)
 \description{
 Does an edge attribute exist?
 }
+\examples{
+edge_attr_exists(.net = florence_business_ig, .edge_attr = "edge_type")
+
+florence_business_nw \%>\% 
+  edge_attr_exists(.edge_attr = "fake attr")
+
+}
 \author{
 Brendan Knapp \email{brendan.knapp@nps.edu}
 }

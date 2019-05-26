@@ -21,6 +21,13 @@ node_get_attr_names(.net)
 \description{
 Get the names of a network's node attributes.
 }
+\examples{
+node_get_attr_names(.net = florence_business_ig)
+
+florence_business_nw \%>\% 
+  node_get_attr_names()
+
+}
 \author{
 Brendan Knapp \email{brendan.knapp@nps.edu}
 }

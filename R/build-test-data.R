@@ -215,6 +215,9 @@ run_edgelist_tests <- function() {
     
     
     if (!res) {
+      print("test_args: "); print(test_args[[i]])
+      print("test_ig: "); print(test_ig)
+      print("test_nw: "); print(test_nw)
       return(FALSE)
     }
   }

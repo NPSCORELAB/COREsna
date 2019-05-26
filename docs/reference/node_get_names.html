@@ -112,11 +112,7 @@
 
     <pre class="usage"><span class='fu'>node_get_names</span>(<span class='no'>.net</span>)
 
-<span class='co'># S3 method for igraph</span>
-<span class='fu'>node_get_names</span>(<span class='no'>.net</span>)
-
-<span class='co'># S3 method for network</span>
-<span class='fu'>node_get_names</span>(<span class='no'>.net</span>)</pre>
+<span class='fu'>node_name_attr</span>(<span class='no'>.net</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -129,18 +125,53 @@
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>vector</code> corresponding to node names. See Details.</p>
+    
+<ul>
+<li><p><code>node_get_names()</code></p><ul>
+<li><p><code>character</code> <code>vector</code></p></li>
+</ul></li>
+</ul>
+
+<ul>
+<li><p><code>node_name_attr()</code>:</p><ul>
+<li><p><code>character</code> scalar</p></li>
+</ul></li>
+</ul>
+
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <ul>
-<li><p><code>igraph</code> uses <code>"name"</code> to name its vertices. <code>node_get_names()</code> returns the <code>"name"</code>
-attribute if present. If not, <code>node_get_names()</code> returns <code>node_seq(.net)</code></p></li>
-<li><p><code>network</code> uses <code>"vertex.names"</code> to names it vertices. <code>node_get_names()</code> always
-returns the <code>"vertex.names"</code> attribute.</p></li>
+<li><p><code>node_get_names()</code></p><ul>
+<li><p>Uses <code>node_name_attr()</code> to determine node names.</p></li>
+</ul></li>
+</ul>
+    <ul>
+<li><p><code>node_name_attr()</code></p><ul>
+<li><p>If <code>.net</code> is an <code>igraph</code> object, <code>node_get_names()</code> returns the node (vertex)
+attribute <code>"name"</code>.</p><ul>
+<li><p>If <code>"name"</code> is not a node attribute, <code>node_get_names()</code> returns <code>node_seq(.net)</code>.</p></li>
+</ul></li>
+<li><p>If <code>.net</code> is a <code>network</code> object, <code>node_get_names()</code> returns the node (vertex)
+attribute <code>"vertex.names"</code>.</p></li>
+</ul></li>
 </ul>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>node_get_names</span>(<span class='kw'>.net</span> <span class='kw'>=</span> <span class='no'>florence_business_ig</span>)</div><div class='output co'>#&gt;  [1] "Acciaiuoli"   "Albizzi"      "Barbadori"    "Bischeri"     "Castellani"  
+#&gt;  [6] "Ginori"       "Guadagni"     "Lamberteschi" "Medici"       "Pazzi"       
+#&gt; [11] "Peruzzi"      "Pucci"        "Ridolfi"      "Salviati"     "Strozzi"     
+#&gt; [16] "Tornabuoni"  </div><div class='input'>
+<span class='no'>florence_business_nw</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>node_get_names</span>()</div><div class='output co'>#&gt;  [1] "Acciaiuoli"   "Albizzi"      "Barbadori"    "Bischeri"     "Castellani"  
+#&gt;  [6] "Ginori"       "Guadagni"     "Lamberteschi" "Medici"       "Pazzi"       
+#&gt; [11] "Peruzzi"      "Pucci"        "Ridolfi"      "Salviati"     "Strozzi"     
+#&gt; [16] "Tornabuoni"  </div><div class='input'>
+<span class='fu'>node_name_attr</span>(<span class='kw'>.net</span> <span class='kw'>=</span> <span class='no'>florence_business_ig</span>)</div><div class='output co'>#&gt; [1] "name"</div><div class='input'>
+<span class='no'>florence_business_nw</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>node_name_attr</span>()</div><div class='output co'>#&gt; [1] "vertex.names"</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -150,7 +181,9 @@ returns the <code>"vertex.names"</code> attribute.</p></li>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
     <h2>Author</h2>
     <p>Brendan Knapp <a href='mailto:brendan.knapp@nps.edu'>brendan.knapp@nps.edu</a></p>

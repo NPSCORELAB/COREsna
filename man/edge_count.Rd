@@ -21,6 +21,16 @@ edge_count(.net)
 \description{
 Count the number of edges in a network.
 }
+\examples{
+edge_count(.net = florence_business_ig)
+
+florence_business_nw \%>\% 
+  edge_count()
+  
+florence_combo_ig \%>\% 
+  edge_count() 
+
+}
 \author{
 Brendan Knapp \email{brendan.knapp@nps.edu}
 }

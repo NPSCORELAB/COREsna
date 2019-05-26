@@ -225,6 +225,19 @@
   as.vector(out, mode = "character")
 }
 
+.flatten_lgl <- function(.x) {
+  list_indices <- .map_which(.x, is.list)
+  
+  if (!.is_empty(list_indices)) {
+    list_indices <- .txt_flatten(list_indices, .collapse = ", ")
+    .stop("Can't coerce the following elements from `list` to `logical`: {list_indices}")
+  }
+  
+  out <- .flatten(.x)
+  
+  as.vector(out, mode = "logical")
+}
+
 # misc =================================================================================
 .compact <- function(.x) {
   Filter(.is_not_empty, .x)
@@ -254,8 +267,17 @@
 }
 
 
+# validators ===========================================================================
+.net_is_valid <- function(.net) {
+  inherits(.net, "igraph") || inherits(.net, "network")
+}
 
-
+.validate_net <- function(.net) {
+  if (!.net_is_valid(.net)) {
+    .stop("`{.net}` is not a valid object. COREsna currently only supports `igraph`
+          and `network` objects.")
+  }
+}
 
 
 

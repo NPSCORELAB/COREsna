@@ -6,6 +6,12 @@
 #' 
 #' @template author-bk
 #' 
+#' @examples 
+#' node_count(.net = florence_business_ig)
+#' 
+#' florence_business_nw %>% 
+#'   node_count()
+#' 
 #' @export
 node_count <- function(.net) {
   UseMethod("node_count")
@@ -29,6 +35,8 @@ node_count.network <- function(.net) {
 }
 
 node_seq <- function(.net) {
+  .validate_net(.net)
+
   seq_len(node_count(.net))
 }
 
@@ -39,6 +47,12 @@ node_seq <- function(.net) {
 #' @return `character` `vector`
 #' 
 #' @template author-bk
+#' 
+#' @examples 
+#' node_get_attr_names(.net = florence_business_ig)
+#' 
+#' florence_business_nw %>% 
+#'   node_get_attr_names()
 #' 
 #' @export
 node_get_attr_names <- function(.net) {
@@ -77,8 +91,19 @@ node_get_attr_names.network <- function(.net) {
 #' 
 #' @template author-bk
 #' 
+#' @examples 
+#' node_attr_exists(.net = florence_business_ig, .node_attr = "wealth")
+#' 
+#' florence_business_nw %>% 
+#'   node_attr_exists(.node_attr = "priors")
+#'   
+#' florence_business_ig %>% 
+#'   node_attr_exists(.node_attr = "fake attr")
+#' 
 #' @export
 node_attr_exists <- function(.net, .node_attr) {
+  .validate_net(.net)
+
   .node_attr %in% node_get_attr_names(.net)
 }
 
@@ -93,8 +118,16 @@ node_attr_exists <- function(.net, .node_attr) {
 #' 
 #' @template author-bk
 #' 
+#' @examples 
+#' node_get_attr(.net = florence_business_ig, .node_attr = "wealth")
+#' 
+#' florence_business_nw %>% 
+#'   node_get_attr(.node_attr = "wealth")
+#' 
 #' @export
 node_get_attr <- function(.net, .node_attr, .node_index = node_seq(.net)) {
+  .validate_net(.net)
+
   if (!.is_scalar_chr(.node_attr)) {
     .stop("`.node_attr` must be a scalar character.")
   }
@@ -110,10 +143,10 @@ node_get_attr <- function(.net, .node_attr, .node_index = node_seq(.net)) {
     .stop("`.node_index` must be a `numeric` or `logical` `vector`")
   }
   if (length(.node_index) != node_count(.net)) {
-    mess <- ifelse(length(.node_index) > node_count(.net), "longer", "shorter")
+    compare_msg <- ifelse(length(.node_index) > node_count(.net), "longer", "shorter")
     .net <- deparse(substitute(.net))
     
-    .stop("`.node_index` is {mess} than the number of nodes in `{.net}`")
+    .stop("`.node_index` is {compare_msg} than the number of nodes in `{.net}`")
   }
 
   UseMethod("node_get_attr")
@@ -142,37 +175,64 @@ node_get_attr.network <- function(.net, .node_attr, .node_index = node_seq(.net)
 #'
 #' @template param-net
 #' 
-#' @return `vector` corresponding to node names. See Details.
-#' 
+#' @return 
+#'  * `node_get_names()`
+#'    + `character` `vector`
+#'      
 #' @details 
-#' * `igraph` uses `"name"` to name its vertices. `node_get_names()` returns the `"name"`
-#'   attribute if present. If not, `node_get_names()` returns `node_seq(.net)` 
-#' * `network` uses `"vertex.names"` to names it vertices. `node_get_names()` always 
-#'   returns the `"vertex.names"` attribute.
-#' 
+#'  * `node_get_names()`
+#'    + Uses `node_name_attr()` to determine node names.
+#'
 #' @template author-bk
+#' 
+#' @examples 
+#' node_get_names(.net = florence_business_ig)
+#' 
+#' florence_business_nw %>% 
+#'   node_get_names()
 #' 
 #' @export
 node_get_names <- function(.net) {
-  UseMethod("node_get_names")
+  .validate_net(.net)
+
+  out <- node_get_attr(.net, node_name_attr(.net)) %{error}% node_seq(.net)
+  if (is.character(out)) {
+    return(out)
+  }
+  as.character(out)
 }
 
 #' @rdname node_get_names
 #' 
-#' @importFrom igraph vertex_attr
+#' @return 
+#' * `node_name_attr()`:
+#'   + `character` scalar
+#'   
+#' @details 
+#' * `node_name_attr()`
+#'   + If `.net` is an `igraph` object, `node_get_names()` returns the node (vertex) 
+#'   attribute `"name"`.
+#'     + If `"name"` is not a node attribute, `node_get_names()` returns `node_seq(.net)`.
+#'   + If `.net` is a `network` object, `node_get_names()` returns the node (vertex)
+#'     attribute `"vertex.names"`.
+#' 
+#' @examples 
+#' node_name_attr(.net = florence_business_ig)
+#' 
+#' florence_business_nw %>% 
+#'   node_name_attr()
 #' 
 #' @export
-node_get_names.igraph <- function(.net) {
-  vertex_attr(.net, "name") %{}% node_seq(.net)
-}
+node_name_attr <- function(.net) {
+  .validate_net(.net)
 
-#' @rdname node_get_names
-#' 
-#' @export
-node_get_names.network <- function(.net) {
-  node_get_attr(.net, "vertex.names")
+  if (inherits(.net, "igraph")) {
+    return("name")
+  }
+  if (inherits(.net, "network")) {
+    return("vertex.names")
+  }
 }
-
 
 
 
