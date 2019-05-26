@@ -24,7 +24,7 @@ build_test_mat <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FAL
 
   } else {
     out <- structure(
-      c(0L, 1L, 1L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 0L,
+      c(1L, 1L, 1L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 0L,
         1L, 0L, 0L, 1L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L,
         0L, 0L, 0L, 0L, 2L, 0L, 0L, 0L, 0L, 0L, 1L, 0L,
         0L, 1L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 1L,
@@ -52,7 +52,7 @@ build_test_mat <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FAL
   if (!.directed) {
     # out[] <- 0.5 * (out + t(out))
     out[] <- (out + t(out)) %/% 2
-    # out[lower.tri(out)] <- 0L
+    out[lower.tri(out)] <- 0L
   }
 
   if (typeof(out) != .storage) {
@@ -71,22 +71,25 @@ el_from_adj_mat <- function(.adj_mat, .weighted = FALSE, ...) {
 }
 
 build_test_el <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE,
-                        .diag = FALSE, .storage = c("int", "dbl"), ...) {
+                        .diag = FALSE, .multiplex = FALSE, .storage = c("int", "dbl"), ...) {
   if (.bipartite) {
     .diag <- FALSE
     .directed <- FALSE
   }
-  
+
   adj_mat <- build_test_mat(.directed = .directed, .bipartite = .bipartite,
                           .weighted = .weighted, .diag = .diag)
+
   out <- el_from_adj_mat(adj_mat, .weighted = .weighted, ...)
-  
-  
-  
+
   out[ , 1L:2L] <- cbind(
     pmin.int(out[, 1L], out[, 2L]), pmax.int(out[, 1L], out[, 2L])
   )
-  
+
+  if (!.multiplex) {
+    out <- unique(out)
+  }
+
   out
 }
 
@@ -94,7 +97,7 @@ build_test_el <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALS
 
 
 build_test_ig <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE, 
-                        .diag = FALSE, ...) {
+                        .diag = FALSE, .isolates = FALSE, ...) {
   if (.bipartite) {
     .diag <- FALSE
     .directed <- FALSE
@@ -118,15 +121,24 @@ build_test_ig <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALS
   
   igraph::V(out)$node_attr <- letters[1:n_nodes]
   
+  if (.isolates) {
+    out <- igraph::add_vertices(out, 1L)
+  }
+  
   out
 }
 
 build_test_nw <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FALSE, 
-                        .diag = FALSE, ...) {
+                          .diag = FALSE, .isolates = FALSE, ...) {
   el <- build_test_el(.directed = .directed, .bipartite = .bipartite, 
-                    .weighted = .weighted, .diag = .diag)
+                      .weighted = .weighted, .diag = .diag)
   
   n_nodes <- length(unique(as.vector(el[ , 1L:2L])))
+  
+  if (.isolates) {
+    n_nodes <- n_nodes + 1
+  }
+  
 
   if (.bipartite) {
     .diag <- FALSE
