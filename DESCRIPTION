@@ -18,6 +18,7 @@ Imports:
 Suggests:
     covr,
     knitr,
+    pkgnet,
     rmarkdown,
     testthat (>= 2.1.0),
     utils

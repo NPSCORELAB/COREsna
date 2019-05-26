@@ -9,7 +9,8 @@
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/yeti/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="A Toolkit for Social Network Analysis">
+<script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
+<meta property="og:title" content="A Toolkit for Social Network Analysis">
 <meta property="og:description" content="A Toolkit for Social Network Analysis.">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -44,6 +45,18 @@
 </li>
 <li>
   <a href="reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="articles/pkgnet-report.html">COREsna Package Report, by pkgnet</a>
+    </li>
+  </ul>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -88,14 +101,16 @@
 <div id="features" class="section level1">
 <h1 class="hasAnchor">
 <a href="#features" class="anchor"></a>Features</h1>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># </span><span class="al">TODO</span></a></code></pre></div>
 </div>
 <div id="developer-notes" class="section level1">
 <h1 class="hasAnchor">
 <a href="#developer-notes" class="anchor"></a>Developer Notes</h1>
 <ul>
-<li>Building {<code>pkgdown</code>} Site</li>
+<li><p><a href="https://npscorelab.github.io/docs/articles/pkgnet-report.html">Dependency Graph</a></p></li>
+<li><p>Building {<code>pkgdown</code>} Site</p></li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">pkgdown<span class="op">::</span><span class="kw"><a href="https://pkgdown.r-lib.org/reference/build_site.html">build_site</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">pkgdown<span class="op">::</span><span class="kw"><a href="https://pkgdown.r-lib.org/reference/build_site.html">build_site</a></span>()</a></code></pre></div>
 </div>
   </div>
 
@@ -128,10 +143,12 @@
       <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle"></a></li>
-<li><a href="https://travis-ci.org/NPSCORELAB/COREsna"><img src="https://travis-ci.org/NPSCORELAB/COREsna.svg?branch=master" alt="Travis-CI Build Status"></a></li>
-<li><a href="https://codecov.io/gh/NPSCORELAB/COREsna"><img src="https://codecov.io/gh/NPSCORELAB/COREsna/branch/master/graph/badge.svg" alt="codecov"></a></li>
 <li><a href="https://www.r-project.org/"><img src="https://img.shields.io/badge/Depends-GNU_R%3E=3.2-blue.svg" alt="Depends"></a></li>
+<li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle"></a></li>
+<li><a href="https://github.com/NPSCORELAB/COREsna/commits/master"><img src="https://img.shields.io/github/last-commit/NPSCORELAB/COREsna.svg" alt="GitHub last commit"></a></li>
+<li><a href="https://codecov.io/gh/NPSCORELAB/COREsna"><img src="https://codecov.io/gh/NPSCORELAB/COREsna/branch/master/graph/badge.svg" alt="codecov"></a></li>
+<li><a href="https://github.com/NPSCORELAB/COREsna"><img src="https://img.shields.io/github/languages/code-size/NPSCORELAB/COREsna.svg" alt="GitHub code size in bytes"></a></li>
+<li><a href="https://travis-ci.org/NPSCORELAB/COREsna"><img src="https://travis-ci.org/NPSCORELAB/COREsna.svg?branch=master" alt="Travis-CI Build Status"></a></li>
 </ul>
 </div>
 </div>
