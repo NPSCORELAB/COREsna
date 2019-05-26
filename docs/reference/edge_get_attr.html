@@ -142,6 +142,22 @@
     <p><code>vector</code> (typically)</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>edge_get_attr</span>(<span class='kw'>.net</span> <span class='kw'>=</span> <span class='no'>florence_business_ig</span>, <span class='kw'>.edge_attr</span> <span class='kw'>=</span> <span class='st'>"edge_type"</span>)</div><div class='output co'>#&gt;  [1] "business" "business" "business" "business" "business" "business"
+#&gt;  [7] "business" "business" "business" "business" "business" "business"
+#&gt; [13] "business" "business" "business" "business" "business" "business"
+#&gt; [19] "business" "business" "business" "business" "business" "business"
+#&gt; [25] "business" "business" "business" "business" "business" "business"</div><div class='input'>
+<span class='no'>florence_marriage_nw</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>edge_get_attr</span>(<span class='kw'>.edge_attr</span> <span class='kw'>=</span> <span class='st'>"edge_type"</span>)</div><div class='output co'>#&gt;  [1] "marital" "marital" "marital" "marital" "marital" "marital" "marital"
+#&gt;  [8] "marital" "marital" "marital" "marital" "marital" "marital" "marital"
+#&gt; [15] "marital" "marital" "marital" "marital" "marital" "marital" "marital"
+#&gt; [22] "marital" "marital" "marital" "marital" "marital" "marital" "marital"
+#&gt; [29] "marital" "marital" "marital" "marital" "marital" "marital" "marital"
+#&gt; [36] "marital" "marital" "marital" "marital" "marital"</div><div class='input'>
+<span class='no'>florence_marriage_nw</span> <span class='kw'>%&gt;%</span>
+  <span class='fu'>edge_get_attr</span>(<span class='kw'>.edge_attr</span> <span class='kw'>=</span> <span class='st'>"edge_type"</span>, <span class='kw'>.edge_index</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>5</span>)</div><div class='output co'>#&gt; [1] "marital" "marital" "marital" "marital" "marital"</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -149,7 +165,9 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
     <h2>Author</h2>
     <p>Brendan Knapp <a href='mailto:brendan.knapp@nps.edu'>brendan.knapp@nps.edu</a></p>

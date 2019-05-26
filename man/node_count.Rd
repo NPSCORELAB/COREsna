@@ -21,6 +21,13 @@ node_count(.net)
 \description{
 Count the number of nodes in a network.
 }
+\examples{
+node_count(.net = florence_business_ig)
+
+florence_business_nw \%>\% 
+  node_count()
+
+}
 \author{
 Brendan Knapp \email{brendan.knapp@nps.edu}
 }

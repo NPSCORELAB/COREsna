@@ -27,6 +27,16 @@ edge_get_attr(.net, .edge_attr, .edge_index = edge_seq(.net))
 \description{
 Extract an edge attribute.
 }
+\examples{
+edge_get_attr(.net = florence_business_ig, .edge_attr = "edge_type")
+
+florence_marriage_nw \%>\% 
+  edge_get_attr(.edge_attr = "edge_type")
+
+florence_marriage_nw \%>\% 
+  edge_get_attr(.edge_attr = "edge_type", .edge_index = 1:5)
+
+}
 \author{
 Brendan Knapp \email{brendan.knapp@nps.edu}
 }

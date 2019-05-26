@@ -2,32 +2,66 @@
 % Please edit documentation in R/nodes.R
 \name{node_get_names}
 \alias{node_get_names}
-\alias{node_get_names.igraph}
-\alias{node_get_names.network}
+\alias{node_name_attr}
 \title{Extract node names.}
 \usage{
 node_get_names(.net)
 
-\method{node_get_names}{igraph}(.net)
-
-\method{node_get_names}{network}(.net)
+node_name_attr(.net)
 }
 \arguments{
 \item{.net}{network of class \code{igraph} or \code{network}.}
 }
 \value{
-\code{vector} corresponding to node names. See Details.
+\itemize{
+\item \code{node_get_names()}
+\itemize{
+\item \code{character} \code{vector}
+}
+}
+
+\itemize{
+\item \code{node_name_attr()}:
+\itemize{
+\item \code{character} scalar
+}
+}
 }
 \description{
 Extract node names.
 }
 \details{
 \itemize{
-\item \code{igraph} uses \code{"name"} to name its vertices. \code{node_get_names()} returns the \code{"name"}
-attribute if present. If not, \code{node_get_names()} returns \code{node_seq(.net)}
-\item \code{network} uses \code{"vertex.names"} to names it vertices. \code{node_get_names()} always
-returns the \code{"vertex.names"} attribute.
+\item \code{node_get_names()}
+\itemize{
+\item Uses \code{node_name_attr()} to determine node names.
 }
+}
+
+\itemize{
+\item \code{node_name_attr()}
+\itemize{
+\item If \code{.net} is an \code{igraph} object, \code{node_get_names()} returns the node (vertex)
+attribute \code{"name"}.
+\itemize{
+\item If \code{"name"} is not a node attribute, \code{node_get_names()} returns \code{node_seq(.net)}.
+}
+\item If \code{.net} is a \code{network} object, \code{node_get_names()} returns the node (vertex)
+attribute \code{"vertex.names"}.
+}
+}
+}
+\examples{
+node_get_names(.net = florence_business_ig)
+
+florence_business_nw \%>\% 
+  node_get_names()
+
+node_name_attr(.net = florence_business_ig)
+
+florence_business_nw \%>\% 
+  node_name_attr()
+
 }
 \author{
 Brendan Knapp \email{brendan.knapp@nps.edu}

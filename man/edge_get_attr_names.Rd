@@ -21,6 +21,13 @@ edge_get_attr_names(.net)
 \description{
 Get the names of a network's edge attributes.
 }
+\examples{
+edge_get_attr_names(.net = florence_business_ig)
+
+florence_business_nw \%>\% 
+  edge_get_attr_names()
+
+}
 \author{
 Brendan Knapp \email{brendan.knapp@nps.edu}
 }

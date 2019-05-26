@@ -6,6 +6,15 @@
 #' 
 #' @template author-bk
 #' 
+#' @examples
+#' edge_count(.net = florence_business_ig)
+#' 
+#' florence_business_nw %>% 
+#'   edge_count()
+#'   
+#' florence_combo_ig %>% 
+#'   edge_count() 
+#' 
 #' @export
 edge_count <- function(.net) {
   UseMethod("edge_count")
@@ -40,6 +49,12 @@ edge_seq <- function(.net) {
 #' @return `character` `vector`
 #' 
 #' @template author-bk
+#' 
+#' @examples 
+#' edge_get_attr_names(.net = florence_business_ig)
+#' 
+#' florence_business_nw %>% 
+#'   edge_get_attr_names()
 #' 
 #' @export
 edge_get_attr_names <- function(.net) {
@@ -81,6 +96,12 @@ edge_get_attr_names.network <- function(.net) {
 #' 
 #' @template author-bk
 #' 
+#' @examples 
+#' edge_attr_exists(.net = florence_business_ig, .edge_attr = "edge_type")
+#' 
+#' florence_business_nw %>% 
+#'   edge_attr_exists(.edge_attr = "fake attr")
+#' 
 #' @export
 edge_attr_exists <- function(.net, .edge_attr) {
   .edge_attr %in% edge_get_attr_names(.net)
@@ -95,6 +116,15 @@ edge_attr_exists <- function(.net, .edge_attr) {
 #' @return `vector` (typically)
 #' 
 #' @template author-bk
+#' 
+#' @examples
+#' edge_get_attr(.net = florence_business_ig, .edge_attr = "edge_type")
+#' 
+#' florence_marriage_nw %>% 
+#'   edge_get_attr(.edge_attr = "edge_type")
+#' 
+#' florence_marriage_nw %>% 
+#'   edge_get_attr(.edge_attr = "edge_type", .edge_index = 1:5)
 #' 
 #' @export
 edge_get_attr <- function(.net, .edge_attr, .edge_index = edge_seq(.net)) {
@@ -112,11 +142,11 @@ edge_get_attr <- function(.net, .edge_attr, .edge_index = edge_seq(.net)) {
   if (!is.numeric(.edge_index) && !is.logical(.edge_index)) {
     .stop("`.edge_index` must be a `numeric` or `logical` `vector`")
   }
-  if (length(.edge_index) != edge_count(.net)) {
-    mess <- ifelse(length(.edge_index) > edge_count(.net), "longer", "shorter")
+  if (length(.edge_index) != edge_count(.net) && is.logical(.edge_index)) {
+    compare_msg <- ifelse(length(.edge_index) > edge_count(.net), "longer", "shorter")
     .net <- deparse(substitute(.net))
 
-    .stop("`.edge_index` is {mess} than the number of edges in `{.net}`")
+    .stop("`.edge_index` is `logical` and {compare_msg} than the number of edges in `{.net}`.")
   }
 
   UseMethod("edge_get_attr")

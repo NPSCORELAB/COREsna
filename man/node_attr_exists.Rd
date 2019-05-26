@@ -17,6 +17,16 @@ node_attr_exists(.net, .node_attr)
 \description{
 Does a node attribute exist?
 }
+\examples{
+node_attr_exists(.net = florence_business_ig, .node_attr = "wealth")
+
+florence_business_nw \%>\% 
+  node_attr_exists(.node_attr = "priors")
+  
+florence_business_ig \%>\% 
+  node_attr_exists(.node_attr = "fake attr")
+
+}
 \author{
 Brendan Knapp \email{brendan.knapp@nps.edu}
 }

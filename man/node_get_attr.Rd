@@ -27,6 +27,13 @@ node_get_attr(.net, .node_attr, .node_index = node_seq(.net))
 \description{
 Extract a node attribute.
 }
+\examples{
+node_get_attr(.net = florence_business_ig, .node_attr = "wealth")
+
+florence_business_nw \%>\% 
+  node_get_attr(.node_attr = "wealth")
+
+}
 \author{
 Brendan Knapp \email{brendan.knapp@nps.edu}
 }

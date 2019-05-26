@@ -21,6 +21,9 @@ reference:
     - edge_get_attr
     - edge_attr_exists
     - edge_get_attr_names
+  - title: "Data"
+    contents:
+      - starts_with("florence")
   - title: "Utilities"
     contents:
       - starts_with("%")
