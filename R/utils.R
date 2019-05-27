@@ -160,6 +160,9 @@
 # mappers ===============================================================================
 .as_mapper <- function(.f, .default) {
   if (!class(.f) %in% c("character", "numeric", "integer")) return(.f)
+
+  force(.default)
+
   function(.x) {
     .x[[.f]] %{error}% .default
   }

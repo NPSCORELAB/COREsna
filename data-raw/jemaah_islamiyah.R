@@ -1,7 +1,7 @@
 library(tidyverse)
 
 # Network is supposed to be undirected, but is not symmetric and which triangle is
-# correct is not noted; Using both
+# correct is not noted; Using upper.
 
 target_url <- "https://sites.google.com/site/ucinetsoftware/datasets/covert-networks/jemaahislamiyahkoschade/Jemaah%20Islamiyah%20Koschade%20CSV.zip?attredirects=0&d=1"
 

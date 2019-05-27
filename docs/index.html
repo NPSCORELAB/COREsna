@@ -81,7 +81,7 @@
 <!--/.navbar -->
 
       
-      </header><div class="row">
+      </header><script src="index_files/kePrint-0.0.1/kePrint.js"></script><div class="row">
   <div class="col-md-9 contents">
     
 
@@ -111,13 +111,463 @@
 <a href="#features" class="anchor"></a>Features</h1>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># </span><span class="al">TODO</span></a></code></pre></div>
 </div>
-<div id="developer-notes" class="section level1">
+<div id="syntax" class="section level1">
 <h1 class="hasAnchor">
-<a href="#developer-notes" class="anchor"></a>Developer Notes</h1>
-<ul>
-<li>Building {<code>pkgdown</code>} Site</li>
-</ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">pkgdown<span class="op">::</span><span class="kw"><a href="https://pkgdown.r-lib.org/reference/build_site.html">build_site</a></span>()</a></code></pre></div>
+<a href="#syntax" class="anchor"></a>Syntax</h1>
+<table class="table table table table-bordered">
+<thead><tr>
+<th style="text-align:left;">
+Action/Metric
+</th>
+<th style="text-align:left;">
+Proposed Syntax
+</th>
+<th style="text-align:left;">
+Related {statnet} Syntax
+</th>
+<th style="text-align:left;">
+Related {igraph} Syntax
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+is network directed?
+</td>
+<td style="text-align:left;">
+<code><a href="reference/net_is_directed.html">net_is_directed()</a></code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/network/topics/network.indicators">network::is.directed()</a></code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/igraph/topics/is_directed">igraph::is_directed()</a></code> <br><code><a href="https://www.rdocumentation.org/packages/igraph/topics/is_directed">igraph::is.directed()</a></code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+are a network’s edges weighted?
+</td>
+<td style="text-align:left;">
+<code><a href="reference/net_is_weighted.html">net_is_weighted()</a></code>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/igraph/topics/is_weighted">igraph::is_weighted()</a></code> <br><code><a href="https://www.rdocumentation.org/packages/igraph/topics/is_weighted">igraph::is.weighted()</a></code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+is a network multiplex?
+</td>
+<td style="text-align:left;">
+<code><a href="reference/net_is_multiplex.html">net_is_multiplex()</a></code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/network/topics/network.indicators">network::is.multiplex()</a></code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/igraph/topics/which_multiple">igraph::any_multiple()</a></code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+is a network bipartite?
+</td>
+<td style="text-align:left;">
+<code><a href="reference/net_is_bipartite.html">net_is_bipartite()</a></code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/network/topics/network.indicators">network::is.bipartite()</a></code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/igraph/topics/make_bipartite_graph">igraph::is_bipartite()</a></code> <br><code><a href="https://www.rdocumentation.org/packages/igraph/topics/make_bipartite_graph">igraph::is.bipartite()</a></code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+does a network have isolates?
+</td>
+<td style="text-align:left;">
+<code><a href="reference/net_has_isolates.html">net_has_isolates()</a></code>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+does a network have loops?
+</td>
+<td style="text-align:left;">
+<code><a href="reference/net_has_loops.html">net_has_loops()</a></code>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/igraph/topics/which_multiple">igraph::which_loop()</a></code> <br><code><a href="https://www.rdocumentation.org/packages/igraph/topics/which_multiple">igraph::is.loop()</a></code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+get node attribute
+</td>
+<td style="text-align:left;">
+<code><a href="reference/node_get_attr.html">node_get_attr()</a></code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/network/topics/attribute.methods">network::get.vertex.attribute()</a></code> <br><code>network::'%vattr%'()</code> <br><code>network::'%v%'()</code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/igraph/topics/V">igraph::V()</a></code> <br><code><a href="https://www.rdocumentation.org/packages/igraph/topics/vertex_attr">igraph::vertex_attr()</a></code> <br><code><a href="https://www.rdocumentation.org/packages/igraph/topics/vertex_attr">igraph::get.vertex.attribute()</a></code> <br><code><a href="https://www.rdocumentation.org/packages/igraph/topics/vertex_attr">igraph::vertex.attributes()</a></code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+get node names
+</td>
+<td style="text-align:left;">
+<code><a href="reference/node_get_names.html">node_get_names()</a></code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/network/topics/attribute.methods">network::network.vertex.names()</a></code>
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+does a node attribute exist?
+</td>
+<td style="text-align:left;">
+<code><a href="reference/node_attr_exists.html">node_attr_exists()</a></code>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+get names of all node attributes
+</td>
+<td style="text-align:left;">
+<code><a href="reference/node_get_attr_names.html">node_get_attr_names()</a></code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/network/topics/attribute.methods">network::list.vertex.attributes()</a></code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/igraph/topics/vertex_attr_names">igraph::vertex_attr_names()</a></code> <br><code><a href="https://www.rdocumentation.org/packages/igraph/topics/vertex_attr_names">igraph::list.vertex.attributes()</a></code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+get edge attribute
+</td>
+<td style="text-align:left;">
+<code><a href="reference/edge_get_attr.html">edge_get_attr()</a></code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/network/topics/attribute.methods">network::get.edge.attribute()</a></code> <br><code>network::'%eattr%'()</code> <br><code>network::'%e%'()</code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/igraph/topics/edge_attr">igraph::edge_attr()</a></code> <br><code><a href="https://www.rdocumentation.org/packages/igraph/topics/edge_attr">igraph::get.edge.attribute()</a></code> <br><code><a href="https://www.rdocumentation.org/packages/igraph/topics/edge_attr">igraph::edge.attributes()</a></code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+does an edge attribute exist?
+</td>
+<td style="text-align:left;">
+<code><a href="reference/edge_attr_exists.html">edge_attr_exists()</a></code>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+get names of all edge attributes
+</td>
+<td style="text-align:left;">
+<code><a href="reference/edge_get_attr_names.html">edge_get_attr_names()</a></code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/network/topics/attribute.methods">network::list.edge.attributes()</a></code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/igraph/topics/edge_attr_names">igraph::edge_attr_names()</a></code> <br><code><a href="https://www.rdocumentation.org/packages/igraph/topics/edge_attr_names">igraph::list.edge.attributes()</a></code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+degree
+</td>
+<td style="text-align:left;">
+<code>node_cent_degree()</code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/sna/topics/degree">sna::degree()</a></code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/igraph/topics/degree">igraph::degree()</a></code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+closeness
+</td>
+<td style="text-align:left;">
+<code>node_cent_closeness()</code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/sna/topics/closeness">sna::closeness()</a></code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/igraph/topics/closeness">igraph::closeness()</a></code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+betweenness
+</td>
+<td style="text-align:left;">
+<code>node_cent_betweenness()</code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/sna/topics/betweenness">sna::betweenness()</a></code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/igraph/topics/betweenness">igraph::betweenness()</a></code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+eigenvector
+</td>
+<td style="text-align:left;">
+<code>node_cent_eigenvector()</code>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<code>igraph::eigen_centrality()$vector</code> <br><code>igraph::evcent()$vector</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+average reciprocal distance
+</td>
+<td style="text-align:left;">
+<code>node_cent_avg_reciprocal_distance()</code>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+order
+</td>
+<td style="text-align:left;">
+<code>topo_order()</code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/network/topics/network.size">network::network.size()</a></code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/igraph/topics/gorder">igraph::vcount()</a></code> <br><code><a href="https://www.rdocumentation.org/packages/igraph/topics/gorder">igraph::gorder()</a></code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+size
+</td>
+<td style="text-align:left;">
+<code>topo_size()</code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/network/topics/network.edgecount">network::network.edgecount()</a></code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/igraph/topics/gsize">igraph::ecount()</a></code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+EI index
+</td>
+<td style="text-align:left;">
+<code>topo_ei_index()</code>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+density
+</td>
+<td style="text-align:left;">
+<code>topo_density()</code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/sna/topics/gden">sna::gden()</a></code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/igraph/topics/edge_density">igraph::edge_density()</a></code> <br><code><a href="https://www.rdocumentation.org/packages/igraph/topics/edge_density">igraph::graph.density()</a></code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+average degree
+</td>
+<td style="text-align:left;">
+<code>topo_average_degree()</code>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+average distance
+</td>
+<td style="text-align:left;">
+<code>topo_average_distance()</code>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/igraph/topics/distances">igraph::mean_distance()</a></code> <br><code><a href="https://www.rdocumentation.org/packages/igraph/topics/distances">igraph::average.path.length()</a></code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+diameter
+</td>
+<td style="text-align:left;">
+<code>topo_diameter()</code>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/igraph/topics/diameter">igraph::diameter()</a></code> <br><code><a href="https://www.rdocumentation.org/packages/igraph/topics/diameter">igraph::get_diameter()</a></code> <br><code><a href="https://www.rdocumentation.org/packages/igraph/topics/diameter">igraph::get.diameter()</a></code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+centralization
+</td>
+<td style="text-align:left;">
+<code>topo_centralization()</code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/sna/topics/centralization">sna::centralization()</a></code>
+</td>
+<td style="text-align:left;">
+<code>igraph::centr_*()</code> <br><code>igraph::centr_*_tmax()</code> <br><code>igraph::centralization.*()</code> <br><code>igraph::centralization.*.tmax()</code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+cohesion
+</td>
+<td style="text-align:left;">
+<code>topo_cohesion()</code>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/igraph/topics/vertex_connectivity">igraph::cohesion()</a></code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+compactness
+</td>
+<td style="text-align:left;">
+<code>topo_compactness()</code>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+fragmentation
+</td>
+<td style="text-align:left;">
+<code>topo_fragmentation()</code>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+reciprocity
+</td>
+<td style="text-align:left;">
+<code>topo_reciprocity()</code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/sna/topics/grecip">sna::grecip()</a></code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/igraph/topics/reciprocity">igraph::reciprocity()</a></code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+transitivity
+</td>
+<td style="text-align:left;">
+<code>topo_transitivity()</code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/sna/topics/gtrans">sna::gtrans()</a></code>
+</td>
+<td style="text-align:left;">
+<code><a href="https://www.rdocumentation.org/packages/igraph/topics/transitivity">igraph::transitivity()</a></code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Moran’s I
+</td>
+<td style="text-align:left;">
+<code>topo_morans_i()</code>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Gerry’s C
+</td>
+<td style="text-align:left;">
+<code>topo_gerrys_c()</code>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+<!-- # Developer Notes --><!-- * Building {`pkgdown`} Site --><!-- ```{r, eval=FALSE} --><!-- pkgdown::build_site() --><!-- ``` --><!-- ```{r, echo=FALSE, eval=FALSE} --><!-- pkgnet::CreatePackageVignette() --><!-- ``` -->
 </div>
   </div>
 

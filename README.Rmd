@@ -1,7 +1,9 @@
 ---
 output: 
+  html_document:
   github_document:
     html_preview: false
+always_allow_html: yes
 editor_options: 
   chunk_output_type: console
 ---
@@ -13,7 +15,9 @@ knitr::opts_chunk$set(
   # collapse = TRUE,
   fig.align = "center",
   comment = "#>",
-  fig.path = "man/figures/"
+  fig.path = "man/figures/",
+  message = FALSE,
+  warning = FALSE
 )
 ```
 
@@ -52,18 +56,231 @@ remotes::install_github("NPSCORELAB/COREsna")
 # TODO
 ```
 
+# Syntax
 
-# Developer Notes
+```{r, echo=FALSE}
+options(knitr.kable.NA = '')
+
+library(tidyverse)
+
+net_access_df <- tibble(
+  # Categpry    = "`net_*()`",
+  # Subcategory = "Network",
+  # `Proposed Prefix` = "`net_*()`",
+  `Action/Metric` = c("is network directed?", "are a network's edges weighted?",
+                      "is a network multiplex?", 
+                      "is a network bipartite?", "does a network have isolates?",
+                      "does a network have loops?"),
+  `Proposed Syntax` = c("`net_is_directed()`", "`net_is_weighted()`",
+                        "`net_is_multiplex()`", "`net_is_bipartite()`",
+                        "`net_has_isolates()`", "`net_has_loops()`"),
+  `Related {statnet} Syntax` = c(
+    "`network::is.directed()`",
+    NA,
+    "`network::is.multiplex()`",
+    "`network::is.bipartite()`",
+    NA,
+    NA
+    ),
+  `Related {igraph} Syntax` = c(
+    "`igraph::is_directed()` <br> `igraph::is.directed()` ",
+    "`igraph::is_weighted()` <br> `igraph::is.weighted()`",
+    "`igraph::any_multiple()`",
+    "`igraph::is_bipartite()` <br> `igraph::is.bipartite()`",
+    NA,
+    "`igraph::which_loop()` <br> `igraph::is.loop()`"
+    )
+)
 
 
-* Building {`pkgdown`} Site
+node_access_df <- tibble(
+  # Categpry    = "`node_*()`",
+  # Subcategory = "Node",
+  # `Proposed Prefix` = "`node_*()`",
+  `Action/Metric` = c(
+    "get node attribute", 
+    "get node names",
+    "does a node attribute exist?",
+    "get names of all node attributes"
+    ),
+  `Proposed Syntax` = c(
+    "`node_get_attr()`", 
+    "`node_get_names()`", 
+    "`node_attr_exists()`",
+    "`node_get_attr_names()`"
+    ),
+  `Related {statnet} Syntax` = c(
+    "`network::get.vertex.attribute()` <br> `network::'%vattr%'()` <br> `network::'%v%'()`",
+    "`network::network.vertex.names()`",
+    NA,
+    "`network::list.vertex.attributes()`"
+    ),
+  `Related {igraph} Syntax` = c(
+    "`igraph::V()` <br> `igraph::vertex_attr()` <br> `igraph::get.vertex.attribute()` <br> `igraph::vertex.attributes()`",
+    NA,
+    NA,
+    "`igraph::vertex_attr_names()` <br> `igraph::list.vertex.attributes()`"
+    )
+)
 
-```{r, eval=FALSE}
-pkgdown::build_site()
+edge_access_df <- tibble(
+  # Categpry    = "`edge_*()`",
+  # Subcategory = "Edge",
+  # `Proposed Prefix` = "`edge_*()`",
+  `Action/Metric` = c(
+    "get edge attribute",
+    "does an edge attribute exist?",
+    "get names of all edge attributes"
+  ),
+  `Proposed Syntax` = c(
+    "`edge_get_attr()`", 
+    "`edge_attr_exists()`",
+    "`edge_get_attr_names()`"
+    ),
+  `Related {statnet} Syntax` = c(
+    "`network::get.edge.attribute()` <br> `network::'%eattr%'()` <br> `network::'%e%'()`",
+    NA,
+    "`network::list.edge.attributes()`"
+    ),
+  `Related {igraph} Syntax` = c(
+    "`igraph::edge_attr()` <br> `igraph::get.edge.attribute()` <br> `igraph::edge.attributes()`",
+    NA,
+    "`igraph::edge_attr_names()` <br> `igraph::list.edge.attributes()`"
+    )
+)
+
+
+
+node_cent_df <- tibble(
+  # Categpry    = "`node_cent_*()`",
+  # Subcategory = "Node Centrality",
+  # `Proposed Prefix` = "`node_cent_*()`",
+  `Action/Metric` = c(
+    "degree", 
+    "closeness", 
+    "betweenness", 
+    "eigenvector",
+    "average reciprocal distance"
+    ),
+  `Proposed Syntax` = c(
+    "`node_cent_degree()`", 
+    "`node_cent_closeness()`",
+    "`node_cent_betweenness()`",
+    "`node_cent_eigenvector()`",
+    "`node_cent_avg_reciprocal_distance()`"
+    ),
+  `Related {statnet} Syntax` = c(
+    "`sna::degree()`",
+    "`sna::closeness()`",
+    "`sna::betweenness()`",
+    NA,
+    NA
+    ),
+  `Related {igraph} Syntax` = c(
+    "`igraph::degree()`",
+    "`igraph::closeness()`",
+    "`igraph::betweenness()`",
+    "`igraph::eigen_centrality()$vector` <br> `igraph::evcent()$vector`",
+    NA
+    )
+)
+  
+
+
+topography_df <- tibble(
+  # Categpry = "`topo_*()`",
+  # Subcategory = "Topography",
+  `Proposed Prefix`   = "topo",
+  `Action/Metric`   = c(
+    "order", 
+    "size", 
+    "EI index",
+    "density", 
+    "average degree",
+    "average distance",
+    "diameter", 
+    "centralization", 
+    "cohesion", 
+    "compactness", 
+    "fragmentation", 
+    "reciprocity",
+    "transitivity",
+    "Moran's I",
+    "Gerry's C")
+  ) %>% 
+  mutate(
+    code_metric = `Action/Metric` %>% 
+      str_to_lower() %>% 
+      str_remove("[:punct:]") %>% 
+      str_replace(" ", "_"),
+    `Proposed Syntax` = glue::glue("`{`Proposed Prefix`}_{code_metric}()`"),
+    `Proposed Prefix` = glue::glue("`{`Proposed Prefix`}_*()`"),
+    `Related {statnet} Syntax` = c(
+      "`network::network.size()`",
+      "`network::network.edgecount()`",
+      NA,
+      "`sna::gden()`",
+      NA,
+      NA,
+      NA,
+      "`sna::centralization()`",
+      NA,
+      NA,
+      NA,
+      "`sna::grecip()`",
+      "`sna::gtrans()`",
+      NA,
+      NA
+    ),
+  `Related {igraph} Syntax` = c(
+    "`igraph::vcount()` <br> `igraph::gorder()`",
+    "`igraph::ecount()`",
+    NA,
+    "`igraph::edge_density()` <br> `igraph::graph.density()`",
+    NA,
+    "`igraph::mean_distance()` <br> `igraph::average.path.length()`",
+    "`igraph::diameter()` <br> `igraph::get_diameter()` <br> `igraph::get.diameter()`",
+    "`igraph::centr_*()` <br> `igraph::centr_*_tmax()` <br> `igraph::centralization.*()` <br> `igraph::centralization.*.tmax()`",
+    "`igraph::cohesion()`",
+    NA,
+    NA,
+    "`igraph::reciprocity()`",
+    "`igraph::transitivity()`",
+    NA,
+    NA
+    )
+  ) %>% 
+  select(-code_metric, -`Proposed Prefix`)
+
+
+bind_rows(
+  net_access_df,
+  node_access_df,
+  edge_access_df,
+  node_cent_df,
+  topography_df
+) %>%
+  # as.data.frame() %>% 
+  # `rownames<-`(.[, 1, drop = TRUE])
+# topography_df %>% 
+  knitr::kable(format = "html", escape = FALSE) %>%
+  kableExtra::kable_styling(bootstrap_options = c("bordered")) #%>% 
+  # kableExtra::column_spec(1, bold = TRUE) %>% 
+  # kableExtra::collapse_rows(columns = 1)
 ```
 
 
+<!-- # Developer Notes -->
 
-```{r, echo=FALSE, eval=FALSE}
-pkgnet::CreatePackageVignette()
-```
+
+<!-- * Building {`pkgdown`} Site -->
+
+<!-- ```{r, eval=FALSE} -->
+<!-- pkgdown::build_site() -->
+<!-- ``` -->
+
+
+
+<!-- ```{r, echo=FALSE, eval=FALSE} -->
+<!-- pkgnet::CreatePackageVignette() -->
+<!-- ``` -->
