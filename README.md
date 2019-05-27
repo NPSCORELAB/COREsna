@@ -41,7 +41,7 @@ remotes::install_github("NPSCORELAB/COREsna")
 
 # Syntax
 
-<table class="table" style="margin-left: auto; margin-right: auto;">
+<table class="table table-bordered" style="margin-left: auto; margin-right: auto;">
 
 <thead>
 
@@ -49,25 +49,25 @@ remotes::install_github("NPSCORELAB/COREsna")
 
 <th style="text-align:left;">
 
-category
+Action/Metric
 
 </th>
 
 <th style="text-align:left;">
 
-prefix
+Proposed Syntax
 
 </th>
 
 <th style="text-align:left;">
 
-metric
+Related {statnet} Syntax
 
 </th>
 
 <th style="text-align:left;">
 
-syntax
+Related {igraph} Syntax
 
 </th>
 
@@ -81,15 +81,487 @@ syntax
 
 <td style="text-align:left;">
 
-topography
+is network directed?
 
 </td>
 
 <td style="text-align:left;">
 
-topo
+`net_is_directed()`
 
 </td>
+
+<td style="text-align:left;">
+
+`network::is.directed()`
+
+</td>
+
+<td style="text-align:left;">
+
+`igraph::is_directed()` <br> `igraph::is.directed()`
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+are a network’s edges weighted?
+
+</td>
+
+<td style="text-align:left;">
+
+`net_is_weighted()`
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+`igraph::is_weighted()` <br> `igraph::is.weighted()`
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+is a network multiplex?
+
+</td>
+
+<td style="text-align:left;">
+
+`net_is_multiplex()`
+
+</td>
+
+<td style="text-align:left;">
+
+`network::is.multiplex()`
+
+</td>
+
+<td style="text-align:left;">
+
+`igraph::any_multiple()`
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+is a network bipartite?
+
+</td>
+
+<td style="text-align:left;">
+
+`net_is_bipartite()`
+
+</td>
+
+<td style="text-align:left;">
+
+`network::is.bipartite()`
+
+</td>
+
+<td style="text-align:left;">
+
+`igraph::is_bipartite()` <br> `igraph::is.bipartite()`
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+does a network have isolates?
+
+</td>
+
+<td style="text-align:left;">
+
+`net_has_isolates()`
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+does a network have loops?
+
+</td>
+
+<td style="text-align:left;">
+
+`net_has_loops()`
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+`igraph::which_loop()` <br> `igraph::is.loop()`
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+get node attribute
+
+</td>
+
+<td style="text-align:left;">
+
+`node_get_attr()`
+
+</td>
+
+<td style="text-align:left;">
+
+`network::get.vertex.attribute()` <br> `network::'%vattr%'()` <br>
+`network::'%v%'()`
+
+</td>
+
+<td style="text-align:left;">
+
+`igraph::V()` <br> `igraph::vertex_attr()` <br>
+`igraph::get.vertex.attribute()` <br> `igraph::vertex.attributes()`
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+get node names
+
+</td>
+
+<td style="text-align:left;">
+
+`node_get_names()`
+
+</td>
+
+<td style="text-align:left;">
+
+`network::network.vertex.names()`
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+does a node attribute exist?
+
+</td>
+
+<td style="text-align:left;">
+
+`node_attr_exists()`
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+get names of all node attributes
+
+</td>
+
+<td style="text-align:left;">
+
+`node_get_attr_names()`
+
+</td>
+
+<td style="text-align:left;">
+
+`network::list.vertex.attributes()`
+
+</td>
+
+<td style="text-align:left;">
+
+`igraph::vertex_attr_names()` <br> `igraph::list.vertex.attributes()`
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+get edge attribute
+
+</td>
+
+<td style="text-align:left;">
+
+`edge_get_attr()`
+
+</td>
+
+<td style="text-align:left;">
+
+`network::get.edge.attribute()` <br> `network::'%eattr%'()` <br>
+`network::'%e%'()`
+
+</td>
+
+<td style="text-align:left;">
+
+`igraph::edge_attr()` <br> `igraph::get.edge.attribute()` <br>
+`igraph::edge.attributes()`
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+does an edge attribute exist?
+
+</td>
+
+<td style="text-align:left;">
+
+`edge_attr_exists()`
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+get names of all edge attributes
+
+</td>
+
+<td style="text-align:left;">
+
+`edge_get_attr_names()`
+
+</td>
+
+<td style="text-align:left;">
+
+`network::list.edge.attributes()`
+
+</td>
+
+<td style="text-align:left;">
+
+`igraph::edge_attr_names()` <br> `igraph::list.edge.attributes()`
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+degree
+
+</td>
+
+<td style="text-align:left;">
+
+`node_cent_degree()`
+
+</td>
+
+<td style="text-align:left;">
+
+`sna::degree()`
+
+</td>
+
+<td style="text-align:left;">
+
+`igraph::degree()`
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+closeness
+
+</td>
+
+<td style="text-align:left;">
+
+`node_cent_closeness()`
+
+</td>
+
+<td style="text-align:left;">
+
+`sna::closeness()`
+
+</td>
+
+<td style="text-align:left;">
+
+`igraph::closeness()`
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+betweenness
+
+</td>
+
+<td style="text-align:left;">
+
+`node_cent_betweenness()`
+
+</td>
+
+<td style="text-align:left;">
+
+`sna::betweenness()`
+
+</td>
+
+<td style="text-align:left;">
+
+`igraph::betweenness()`
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+eigenvector
+
+</td>
+
+<td style="text-align:left;">
+
+`node_cent_eigenvector()`
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+`igraph::eigen_centrality()$vector` <br> `igraph::evcent()$vector`
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+average reciprocal distance
+
+</td>
+
+<td style="text-align:left;">
+
+`node_cent_avg_reciprocal_distance()`
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
+</tr>
+
+<tr>
 
 <td style="text-align:left;">
 
@@ -103,21 +575,21 @@ order
 
 </td>
 
+<td style="text-align:left;">
+
+`network::network.size()`
+
+</td>
+
+<td style="text-align:left;">
+
+`igraph::vcount()` <br> `igraph::gorder()`
+
+</td>
+
 </tr>
 
 <tr>
-
-<td style="text-align:left;">
-
-topography
-
-</td>
-
-<td style="text-align:left;">
-
-topo
-
-</td>
 
 <td style="text-align:left;">
 
@@ -131,21 +603,21 @@ size
 
 </td>
 
+<td style="text-align:left;">
+
+`network::network.edgecount()`
+
+</td>
+
+<td style="text-align:left;">
+
+`igraph::ecount()`
+
+</td>
+
 </tr>
 
 <tr>
-
-<td style="text-align:left;">
-
-topography
-
-</td>
-
-<td style="text-align:left;">
-
-topo
-
-</td>
 
 <td style="text-align:left;">
 
@@ -159,21 +631,17 @@ EI index
 
 </td>
 
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
 </tr>
 
 <tr>
-
-<td style="text-align:left;">
-
-topography
-
-</td>
-
-<td style="text-align:left;">
-
-topo
-
-</td>
 
 <td style="text-align:left;">
 
@@ -187,21 +655,21 @@ density
 
 </td>
 
+<td style="text-align:left;">
+
+`sna::gden()`
+
+</td>
+
+<td style="text-align:left;">
+
+`igraph::edge_density()` <br> `igraph::graph.density()`
+
+</td>
+
 </tr>
 
 <tr>
-
-<td style="text-align:left;">
-
-topography
-
-</td>
-
-<td style="text-align:left;">
-
-topo
-
-</td>
 
 <td style="text-align:left;">
 
@@ -215,21 +683,17 @@ average degree
 
 </td>
 
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
 </tr>
 
 <tr>
-
-<td style="text-align:left;">
-
-topography
-
-</td>
-
-<td style="text-align:left;">
-
-topo
-
-</td>
 
 <td style="text-align:left;">
 
@@ -243,21 +707,19 @@ average distance
 
 </td>
 
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+`igraph::mean_distance()` <br> `igraph::average.path.length()`
+
+</td>
+
 </tr>
 
 <tr>
-
-<td style="text-align:left;">
-
-topography
-
-</td>
-
-<td style="text-align:left;">
-
-topo
-
-</td>
 
 <td style="text-align:left;">
 
@@ -271,21 +733,20 @@ diameter
 
 </td>
 
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+`igraph::diameter()` <br> `igraph::get_diameter()` <br>
+`igraph::get.diameter()`
+
+</td>
+
 </tr>
 
 <tr>
-
-<td style="text-align:left;">
-
-topography
-
-</td>
-
-<td style="text-align:left;">
-
-topo
-
-</td>
 
 <td style="text-align:left;">
 
@@ -299,21 +760,22 @@ centralization
 
 </td>
 
+<td style="text-align:left;">
+
+`sna::centralization()`
+
+</td>
+
+<td style="text-align:left;">
+
+`igraph::centr_*()` <br> `igraph::centr_*_tmax()` <br>
+`igraph::centralization.*()` <br> `igraph::centralization.*.tmax()`
+
+</td>
+
 </tr>
 
 <tr>
-
-<td style="text-align:left;">
-
-topography
-
-</td>
-
-<td style="text-align:left;">
-
-topo
-
-</td>
 
 <td style="text-align:left;">
 
@@ -327,21 +789,19 @@ cohesion
 
 </td>
 
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+`igraph::cohesion()`
+
+</td>
+
 </tr>
 
 <tr>
-
-<td style="text-align:left;">
-
-topography
-
-</td>
-
-<td style="text-align:left;">
-
-topo
-
-</td>
 
 <td style="text-align:left;">
 
@@ -355,21 +815,17 @@ compactness
 
 </td>
 
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
 </tr>
 
 <tr>
-
-<td style="text-align:left;">
-
-topography
-
-</td>
-
-<td style="text-align:left;">
-
-topo
-
-</td>
 
 <td style="text-align:left;">
 
@@ -383,21 +839,17 @@ fragmentation
 
 </td>
 
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
 </tr>
 
 <tr>
-
-<td style="text-align:left;">
-
-topography
-
-</td>
-
-<td style="text-align:left;">
-
-topo
-
-</td>
 
 <td style="text-align:left;">
 
@@ -411,21 +863,21 @@ reciprocity
 
 </td>
 
+<td style="text-align:left;">
+
+`sna::grecip()`
+
+</td>
+
+<td style="text-align:left;">
+
+`igraph::reciprocity()`
+
+</td>
+
 </tr>
 
 <tr>
-
-<td style="text-align:left;">
-
-topography
-
-</td>
-
-<td style="text-align:left;">
-
-topo
-
-</td>
 
 <td style="text-align:left;">
 
@@ -439,21 +891,21 @@ transitivity
 
 </td>
 
+<td style="text-align:left;">
+
+`sna::gtrans()`
+
+</td>
+
+<td style="text-align:left;">
+
+`igraph::transitivity()`
+
+</td>
+
 </tr>
 
 <tr>
-
-<td style="text-align:left;">
-
-topography
-
-</td>
-
-<td style="text-align:left;">
-
-topo
-
-</td>
 
 <td style="text-align:left;">
 
@@ -467,21 +919,17 @@ Moran’s I
 
 </td>
 
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
 </tr>
 
 <tr>
-
-<td style="text-align:left;">
-
-topography
-
-</td>
-
-<td style="text-align:left;">
-
-topo
-
-</td>
 
 <td style="text-align:left;">
 
@@ -495,18 +943,32 @@ Gerry’s C
 
 </td>
 
+<td style="text-align:left;">
+
+</td>
+
+<td style="text-align:left;">
+
+</td>
+
 </tr>
 
 </tbody>
 
 </table>
 
-# Developer Notes
+<!-- # Developer Notes -->
 
-  - Building {`pkgdown`} Site
+<!-- * Building {`pkgdown`} Site -->
 
-<!-- end list -->
+<!-- ```{r, eval=FALSE} -->
 
-``` r
-pkgdown::build_site()
-```
+<!-- pkgdown::build_site() -->
+
+<!-- ``` -->
+
+<!-- ```{r, echo=FALSE, eval=FALSE} -->
+
+<!-- pkgnet::CreatePackageVignette() -->
+
+<!-- ``` -->
