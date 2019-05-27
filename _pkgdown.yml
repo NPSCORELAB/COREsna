@@ -9,14 +9,22 @@ development:
   mode: unreleased
 
 reference:
-  - title: "Nodes"
+  - title: "net"
+    contents:
+    - net_is_directed
+    - net_is_weighted
+    - net_is_multiplex
+    - net_is_bipartite
+    - net_has_isolates
+    - net_has_loops
+  - title: "node"
     contents:
     - node_count
     - node_get_attr
     - node_get_names
     - node_attr_exists
     - node_get_attr_names
-  - title: "Edges"
+  - title: "edge"
     contents:
     - edge_count
     - edge_get_attr
@@ -25,7 +33,4 @@ reference:
   - title: "Data"
     contents:
       - starts_with("florence")
-  - title: "Utilities"
-    contents:
-      - starts_with("%")
 

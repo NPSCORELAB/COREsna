@@ -19,6 +19,8 @@ Status](https://travis-ci.org/NPSCORELAB/COREsna.svg?branch=master)](https://tra
 [![License: GPL
 v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Depends](https://img.shields.io/badge/Depends-GNU_R%3E=3.2-blue.svg)](https://www.r-project.org/)
+[![GitHub code size in
+bytes](https://img.shields.io/github/languages/code-size/NPSCORELAB/COREsna.svg)](https://github.com/NPSCORELAB/COREsna)
 [![HitCount](http://hits.dwyl.io/NPSCORELAB/COREsna.svg)](http://hits.dwyl.io/NPSCORELAB/COREsna)
 <!-- badges: end -->
 
