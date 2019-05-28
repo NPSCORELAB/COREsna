@@ -46,7 +46,7 @@ net_is_directed.network <- function(.net) {
 #' 
 #' @export
 net_is_weighted <- function(.net) {
-  .validate_net(.net)
+  .validate_net_arg(.net)
   "weight" %in% edge_get_attr_names(.net)
 }
 

@@ -271,16 +271,215 @@
 
 
 # validators ===========================================================================
+.match_arg <- function(.arg, .options) {
+  stopifnot(.arg %in% .options)
+  match.arg(.arg, choices = .options, several.ok = FALSE)
+}
+
 .net_is_valid <- function(.net) {
   inherits(.net, "igraph") || inherits(.net, "network")
 }
 
-.validate_net <- function(.net) {
-  if (!.net_is_valid(.net)) {
-    .stop("`{.net}` is not a valid object. COREsna currently only supports `igraph`
+.validate_net_arg <- function(.net_arg, .allow_bipartite = FALSE) {
+  if (!.net_is_valid(.net_arg)) {
+    .stop("`{.net_arg}` is not a valid object. COREsna currently only supports `igraph`
           and `network` objects.")
   }
+
+  if (net_is_bipartite(.net_arg) && .allow_bipartite) {
+    .net_arg <- deparse(substitute(.net_arg))
+    .stop("{.net_arg} is bipartite")
+  }
 }
+
+# .validate_node_index_arg <- function(.net_arg, .node_index_arg) {
+#   if (.is_empty(.node_index_arg)) {
+#     .stop("`node_index` is empty.")
+#   }
+# 
+#   if (!is.numeric(.node_index_arg) && !is.logical(.node_index_arg)) {
+#     bad_class <- .txt_flatten(class(.node_index_arg), .collapse = ", ")
+#     .stop("`node_index` must be a `numeric` or `logical` `vector`, not {bad_class}")
+#   }
+# 
+#   if (is.logical(.node_index_arg) && length(.node_index_arg) != node_count(.net_arg)) {
+#     compare_msg <- ifelse(
+#       length(.node_index_arg) > node_count(.net_arg), "longer", "shorter"
+#     )
+#     .net_arg <- deparse(substitute(.net_arg))
+#     .stop(
+#       "`node_index` is `logical`, but {compare_msg} than the number of nodes in
+#       `{.net_arg}`."
+#     )
+#   }
+# }
+# 
+# .validate_loops_arg <- function(.loops_arg) {
+#   if (!is.logical(.loops_arg)) {
+#     bad_class <- .txt_flatten(class(.loops_arg), .collapse = ", ")
+#     .stop("`loops` must be logical, not {bad_class}.")
+#   }
+# }
+# 
+# .validate_direction_arg <- function(.direction_arg) {
+#   if (!.direction_arg %in% c("in", "out", "all")) {
+#     .direction_arg <- deparse(substitute(.direction_arg))
+#     .stop(
+#       '`direction` must be one of `"in"`, `"out"`, or `"all"`, not {.direction_arg}.'
+#     )
+#   }
+# }
+# 
+# .args_to_match <- function() {
+#   c("direction", "node_index", "edge_index", "loops", "allow_bipartite")
+# }
+# 
+# .valid_args <- function() {
+#   
+# }
+# 
+# .validate_args <- function(.args, .which_args = c("net", "direction", "node_index",
+#                                                   "edge_index", "loops",
+#                                                   "allow_bipartite")) {
+#   .which_args <- .which_args[.which_args %in% names(.args)]
+#   
+#   if ("net" %in% .which_args) {
+#     net_arg <- .args[["net"]]
+#     
+#     if (!.net_is_valid(net_arg)) {
+#       bad_class <- .txt_flatten(class(net_arg), .collapse = ", ")
+#       .stop("`{net_arg}` is not a valid object. COREsna currently only supports `igraph`
+#           and `network` objects, not {net_arg}.")
+#     }
+#     
+#     if (net_is_bipartite(net_arg) && .args[["allow_biparite"]]) {
+#       .net_arg <- deparse(substitute(.net_arg))
+#       .stop("{net_arg} is bipartite.")
+#     }
+#   }
+#   
+#   
+#   if ("direction" %in% .which_args) {
+#     if (.all_equal(.args[["direction"]], c("in", "out", "all"))) {
+#       .args[["direction"]] <- "in"
+#     }
+#     if (!.is_scalar_chr(.args[["direction"]])) {
+#       bad_arg <- .args[["direction"]]
+#       bad_arg <- deparse(substitute(bad_arg))
+#       .stop(
+#         '`direction` must be a scalar `character`, not {bad_arg}.'
+#       )
+#     }
+#     if ( !.args[["direction"]] %in% c("in", "out", "all")) {
+#       bad_arg <- .args[["direction"]]
+#       bad_arg <- deparse(substitute(bad_arg))
+#       .stop(
+#         '`direction` must be one of `"in"`, `"out"`, or `"all"`, not {bad_arg}.'
+#       )
+#     }
+#   }
+#   
+#   if ("loops" %in% .which_args) {
+#     if (!is.logical(.args[["loops"]])) {
+#       bad_class <- .txt_flatten(class(.args[["loops"]]), .collapse = ", ")
+#       .stop("`loops` must be logical, not {bad_class}.")
+#     }
+#   }
+#   
+#   if ("node_index" %in% .which_args) {
+#     node_index_arg <- .args[["node_index"]]
+#     if (.is_empty(node_index_arg)) {
+#       .stop("`node_index` is empty.")
+#     }
+#     
+#     if (!is.numeric(node_index_arg) && !is.logical(node_index_arg)) {
+#       bad_class <- .txt_flatten(class(node_index_arg), .collapse = ", ")
+#       .stop("`node_index` must be a `numeric` or `logical` `vector`, not `{bad_class}`")
+#     }
+#     
+#     if (is.logical(node_index_arg) && length(node_index_arg) != node_count(net_arg)) {
+#       if (length(node_index_arg) > node_count(net_arg)) {
+#         compare_msg <- "longer"
+#       } else {
+#         compare_msg <- "shorter"
+#       }
+#       net_arg <- deparse(substitute(net_arg))
+#       .stop(
+#         "`node_index` is `logical`, but {compare_msg} than the number of nodes in`{net_arg}`."
+#       )
+#     }
+#   }
+#   
+#   if ("edge_index" %in% .which_args) {
+#     edge_index_arg <- .args[["edge_index"]]
+#     if (.is_empty(edge_index_arg)) {
+#       .stop("`edge_index` is empty.")
+#     }
+#     
+#     if (!is.numeric(edge_index_arg) && !is.logical(edge_index_arg)) {
+#       bad_class <- .txt_flatten(class(edge_index_arg), .collapse = ", ")
+#       .stop("`edge_index` must be a `numeric` or `logical` `vector`, not {bad_class}")
+#     }
+#     
+#     if (is.logical(edge_index_arg) && length(edge_index_arg) != edge_count(net_arg)) {
+#       if (length(edge_index_arg) > node_count(net_arg)) {
+#         compare_msg <- "longer"
+#       } else {
+#         compare_msg <- "shorter"
+#       }
+#       net_arg <- deparse(substitute(net_arg))
+#       .stop(
+#         "`edge_index` is `logical`, but {compare_msg} than the number of nodes in`{net_arg}`."
+#       )
+#     }
+#   }
+# }
+# 
+# 
+# .collect_args <- function(.envir = parent.frame()) {
+#   dots <- match.call(sys.function(which = -1L),
+#                      sys.call(which = -1L),
+#                      expand.dots = FALSE)$..
+#   
+#   c(as.list(parent.frame()), dots)
+# }
+
+get_graph_engine <- function() {
+  getOption(x = "graph_engine", default = "native")
+}
+
+
+
+# test_foo <- function(direction = "in", node_index) {
+#   # return(direction)
+#   # dont_exist <- .map_lgl(.args[["which_args"]], exists)
+#   # return(match.call())
+#   print(.collect_args())
+#   
+#   .validate_args(.args = .collect_args())
+#   # return(direction)
+# }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

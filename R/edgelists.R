@@ -1,5 +1,5 @@
 fetch_edgelist <- function(.net, .node_attr = node_name_attr(.net), ...) {
-  .validate_net(.net)
+  .validate_net_arg(.net)
 
   if (!is.null(.node_attr)) {
     fill <- node_get_attr(.net, .node_attr)

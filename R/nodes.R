@@ -35,7 +35,7 @@ node_count.network <- function(.net) {
 }
 
 node_seq <- function(.net) {
-  .validate_net(.net)
+  .validate_net_arg(.net)
 
   seq_len(node_count(.net))
 }
@@ -102,7 +102,7 @@ node_get_attr_names.network <- function(.net) {
 #' 
 #' @export
 node_attr_exists <- function(.net, .node_attr) {
-  .validate_net(.net)
+  .validate_net_arg(.net)
 
   .node_attr %in% node_get_attr_names(.net)
 }
@@ -126,7 +126,7 @@ node_attr_exists <- function(.net, .node_attr) {
 #' 
 #' @export
 node_get_attr <- function(.net, .node_attr, .node_index = node_seq(.net)) {
-  .validate_net(.net)
+  .validate_net_arg(.net)
 
   if (!.is_scalar_chr(.node_attr)) {
     .stop("`.node_attr` must be a scalar character.")
@@ -193,7 +193,7 @@ node_get_attr.network <- function(.net, .node_attr, .node_index = node_seq(.net)
 #' 
 #' @export
 node_get_names <- function(.net) {
-  .validate_net(.net)
+  .validate_net_arg(.net)
 
   out <- node_get_attr(.net, node_name_attr(.net)) %{error}% node_seq(.net)
   if (is.character(out)) {
@@ -224,7 +224,7 @@ node_get_names <- function(.net) {
 #' 
 #' @export
 node_name_attr <- function(.net) {
-  .validate_net(.net)
+  .validate_net_arg(.net)
 
   if (inherits(.net, "igraph")) {
     return("name")

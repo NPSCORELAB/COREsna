@@ -14,7 +14,8 @@ Imports:
     glue,
     igraph,
     magrittr,
-    network
+    network,
+    sna
 Suggests:
     covr,
     knitr,

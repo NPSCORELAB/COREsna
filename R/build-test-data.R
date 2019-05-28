@@ -11,7 +11,7 @@ build_test_mat <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FAL
     .directed <- FALSE
     
     out <- structure(
-      c(1L, 1L, 0L, 1L, 0L, 1L,
+      c(1L, 1L, 0L, 1L, 2L, 1L,
         1L, 0L, 2L, 0L, 0L, 1L, 
         0L, 1L, 1L, 1L, 0L, 0L, 
         1L, 0L, 1L, 0L, 2L, 0L, 
@@ -24,7 +24,7 @@ build_test_mat <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FAL
 
   } else {
     out <- structure(
-      c(1L, 1L, 1L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 0L,
+      c(1L, 1L, 1L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 2L, 0L,
         1L, 0L, 0L, 1L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L,
         0L, 0L, 0L, 0L, 2L, 0L, 0L, 0L, 0L, 0L, 1L, 0L,
         0L, 1L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 0L, 0L, 1L,
@@ -51,7 +51,8 @@ build_test_mat <- function(.directed = TRUE, .bipartite = FALSE, .weighted = FAL
   
   if (!.directed) {
     # out[] <- 0.5 * (out + t(out))
-    out[] <- (out + t(out)) %/% 2
+    # out[] <- (out + t(out)) %/% 2
+    out <- as.matrix(Matrix::forceSymmetric(out))
     out[lower.tri(out)] <- 0L
   }
 
